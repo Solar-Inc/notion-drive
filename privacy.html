@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notion Drive Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for the Notion Drive Chrome extension." />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f8;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #666666;
+      --border: #e5e5e5;
+      --link: #2563eb;
+      --code: #f2f2f2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111214;
+        --card: #1a1c1f;
+        --text: #f3f4f6;
+        --muted: #a3a3a3;
+        --border: #2b2d31;
+        --link: #7aa2ff;
+        --code: #24262a;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+    article {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.04);
+    }
+    h1, h2, h3 { line-height: 1.3; }
+    h1 { margin-top: 0; font-size: 2rem; }
+    h2 { margin-top: 2rem; font-size: 1.35rem; }
+    h3 { margin-top: 1.5rem; font-size: 1.08rem; }
+    p, li { font-size: 1rem; }
+    .meta, .muted { color: var(--muted); }
+    a { color: var(--link); }
+    code {
+      background: var(--code);
+      padding: .1em .35em;
+      border-radius: 5px;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 44px 0;
+    }
+    .notice {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--code);
+    }
+    ul { padding-left: 1.4rem; }
+  </style>
+</head>
+<body>
+<main>
+<article>
+  <h1>Notion Drive Privacy Policy</h1>
+  <p class="meta"><strong>Last updated:</strong> September 13, 2026</p>
+
+  <p>
+    Notion Drive is a Chrome extension that lets users use their own Notion workspace
+    as an encrypted file drive. This Privacy Policy explains what data the extension
+    handles, why it is needed, where it is stored, and how it is used.
+  </p>
+
+  <div class="notice">
+    <strong>Summary:</strong> Notion Drive does not sell user data, does not use user data
+    for advertising, and does not operate a separate analytics or tracking service.
+    Data handled by the extension is used only to provide the extension's file-drive,
+    encryption, profile, synchronization, upload, and download features.
+  </div>
+
+  <h2>1. Data handled by Notion Drive</h2>
+
+  <h3>Authentication information</h3>
+  <p>The extension may handle information required to connect to and unlock a user's Notion Drive, including:</p>
+  <ul>
+    <li>Notion integration tokens provided by the user.</li>
+    <li>Encryption passwords entered by the user.</li>
+    <li>Encrypted credentials and encrypted profile configuration.</li>
+    <li>Encryption-related key material required to unlock the user's encrypted drive.</li>
+  </ul>
+
+  <p>
+    Encryption passwords are used locally to derive or unlock encryption keys. Notion Drive
+    does not transmit the user's encryption password to a developer-operated server.
+  </p>
+
+  <h3>Website and file content</h3>
+  <p>
+    To provide drive functionality, the extension may access content stored in the user's
+    selected Notion workspace, including Notion pages, blocks, file metadata, folder metadata,
+    and files that the user chooses to upload, download, preview, organize, or delete.
+  </p>
+
+  <h2>2. How data is used</h2>
+  <p>User data is used only to provide Notion Drive's core features, including:</p>
+  <ul>
+    <li>Connecting to the user's selected Notion workspace.</li>
+    <li>Reading and managing drive-related Notion pages and blocks.</li>
+    <li>Uploading, downloading, moving, renaming, previewing, searching, favoriting, and deleting files.</li>
+    <li>Encrypting files before storage and decrypting files locally when accessed.</li>
+    <li>Maintaining local drive metadata, index state, cache, and profile settings.</li>
+    <li>Synchronizing encrypted profile information through Chrome Sync when the user uses that feature.</li>
+    <li>Remembering this computer when the user enables that option.</li>
+  </ul>
+
+  <h2>3. Where data is stored</h2>
+  <p>Depending on the feature being used, Notion Drive may store data in:</p>
+  <ul>
+    <li>The user's own Notion workspace.</li>
+    <li>Chrome extension storage, including <code>chrome.storage.local</code>, <code>chrome.storage.session</code>, and <code>chrome.storage.sync</code>.</li>
+    <li>Browser-managed local storage used for temporary large-file processing, such as Origin Private File System storage.</li>
+  </ul>
+
+  <p>
+    Sensitive profile information stored through Chrome Sync is encrypted by Notion Drive
+    before synchronization when applicable to the feature.
+  </p>
+
+  <h2>4. Network access</h2>
+  <p>Notion Drive communicates only with services required for its core functionality, including:</p>
+  <ul>
+    <li><strong>api.notion.com</strong> for the Notion API.</li>
+    <li><strong>*.notion-static.com</strong> for Notion-hosted file content.</li>
+    <li><strong>*.amazonaws.com</strong> when Notion provides temporary file storage URLs backed by Amazon S3.</li>
+  </ul>
+
+  <p>
+    The extension does not request access to arbitrary websites and does not collect the user's
+    general browsing history.
+  </p>
+
+  <h2>5. Remote code</h2>
+  <p>
+    Notion Drive does not execute remotely hosted JavaScript or WebAssembly. Executable code
+    used by the extension is included in the extension package. Data retrieved from Notion or
+    file-storage endpoints is treated as data, not executable code.
+  </p>
+
+  <h2>6. Data sharing and sale</h2>
+  <p>Notion Drive does not:</p>
+  <ul>
+    <li>Sell user data.</li>
+    <li>Use user data for advertising or behavioral profiling.</li>
+    <li>Use user data for purposes unrelated to the extension's single purpose.</li>
+    <li>Use user data for credit scoring, lending, or financial eligibility decisions.</li>
+  </ul>
+
+  <p>
+    Data may be transmitted to Notion and related file-storage infrastructure only as necessary
+    to perform the actions requested by the user.
+  </p>
+
+  <h2>7. Analytics and tracking</h2>
+  <p>
+    Notion Drive does not include a developer-operated analytics, advertising, or cross-site
+    tracking service.
+  </p>
+
+  <h2>8. Data retention and deletion</h2>
+  <p>
+    Users can remove local extension data by deleting profiles, clearing extension storage,
+    or uninstalling the extension. Data stored in the user's Notion workspace remains under
+    the user's control and can be removed from Notion by the user.
+  </p>
+
+  <p>
+    Chrome Sync data is managed through the user's Chrome account and Chrome synchronization
+    settings. Uninstalling the extension may not by itself immediately remove every value
+    synchronized by Chrome.
+  </p>
+
+  <h2>9. Security</h2>
+  <p>
+    Notion Drive is designed to encrypt drive files before storage and to decrypt them locally
+    when accessed. Users are responsible for protecting their Notion integration token,
+    encryption password, Chrome account, and devices.
+  </p>
+
+  <p>
+    If required encryption credentials are lost, encrypted files may become unrecoverable.
+  </p>
+
+  <h2>10. Third-party services</h2>
+  <p>
+    Notion Drive depends on third-party services including Notion and Chrome. Their handling
+    of information is governed by their own privacy policies and terms.
+  </p>
+
+  <h2>11. Children's privacy</h2>
+  <p>
+    Notion Drive is not designed to knowingly collect personal information from children.
+  </p>
+
+  <h2>12. Changes to this policy</h2>
+  <p>
+    This Privacy Policy may be updated when Notion Drive's functionality or data practices
+    change. The date at the top of this page identifies the latest revision.
+  </p>
+
+  <h2>13. Contact</h2>
+  <p>
+    For privacy-related questions, please use the support contact or support page associated
+    with the Notion Drive listing on the Chrome Web Store.
+  </p>
+
+  <p class="muted">
+    Notion Drive is an independent project and is not affiliated with or endorsed by Notion Labs, Inc.
+  </p>
+
+  <hr />
+
+  <h1 lang="zh-Hant">Notion Drive 隱私權政策</h1>
+  <p class="meta" lang="zh-Hant"><strong>最後更新：</strong>2026 年 9 月 13 日</p>
+
+  <p lang="zh-Hant">
+    Notion Drive 是一款 Chrome 擴充功能，讓使用者可以將自己的 Notion 工作區作為加密檔案空間。
+    本政策說明擴充功能會處理哪些資料、處理原因、儲存位置與用途。
+  </p>
+
+  <div class="notice" lang="zh-Hant">
+    <strong>摘要：</strong>Notion Drive 不販售使用者資料、不將使用者資料用於廣告，
+    也沒有使用開發者自建的分析或追蹤服務。擴充功能處理的資料只用於提供檔案管理、
+    加密、Profile、同步、上傳及下載功能。
+  </div>
+
+  <h2 lang="zh-Hant">1. Notion Drive 會處理的資料</h2>
+
+  <h3 lang="zh-Hant">驗證資訊</h3>
+  <p lang="zh-Hant">為了連接與解鎖使用者的 Notion Drive，擴充功能可能處理：</p>
+  <ul lang="zh-Hant">
+    <li>使用者自行提供的 Notion Integration Token。</li>
+    <li>使用者輸入的加密密碼。</li>
+    <li>加密後的憑證與 Profile 設定。</li>
+    <li>解鎖加密 Drive 所需的相關金鑰資料。</li>
+  </ul>
+
+  <p lang="zh-Hant">
+    加密密碼只用於本機衍生或解鎖加密金鑰。Notion Drive 不會將使用者的加密密碼
+    傳送至開發者自行營運的伺服器。
+  </p>
+
+  <h3 lang="zh-Hant">網站與檔案內容</h3>
+  <p lang="zh-Hant">
+    為了提供 Drive 功能，擴充功能可能存取使用者指定 Notion 工作區內的內容，
+    包括 Notion 頁面、Block、檔案 Metadata、資料夾 Metadata，以及使用者選擇
+    上傳、下載、預覽、整理或刪除的檔案。
+  </p>
+
+  <h2 lang="zh-Hant">2. 資料用途</h2>
+  <p lang="zh-Hant">使用者資料只會用於提供 Notion Drive 的核心功能，包括：</p>
+  <ul lang="zh-Hant">
+    <li>連接使用者指定的 Notion 工作區。</li>
+    <li>讀取與管理 Drive 相關的 Notion Page 與 Block。</li>
+    <li>上傳、下載、移動、重新命名、預覽、搜尋、加入最愛及刪除檔案。</li>
+    <li>在儲存前加密檔案，並在使用時於本機解密。</li>
+    <li>維護本機 Drive Metadata、索引、快取與 Profile 設定。</li>
+    <li>使用相關功能時，透過 Chrome Sync 同步加密後的 Profile 資訊。</li>
+    <li>使用者啟用「記住這台電腦」時保存必要的本機解鎖資訊。</li>
+  </ul>
+
+  <h2 lang="zh-Hant">3. 資料儲存位置</h2>
+  <p lang="zh-Hant">依照使用功能不同，Notion Drive 可能將資料儲存在：</p>
+  <ul lang="zh-Hant">
+    <li>使用者自己的 Notion 工作區。</li>
+    <li>Chrome 擴充功能儲存空間，包括 <code>chrome.storage.local</code>、<code>chrome.storage.session</code> 與 <code>chrome.storage.sync</code>。</li>
+    <li>瀏覽器管理的本機儲存空間，例如大檔案暫存所使用的 Origin Private File System。</li>
+  </ul>
+
+  <p lang="zh-Hant">
+    透過 Chrome Sync 儲存的敏感 Profile 資訊，在相關功能適用時會先由 Notion Drive 加密後再同步。
+  </p>
+
+  <h2 lang="zh-Hant">4. 網路存取</h2>
+  <p lang="zh-Hant">Notion Drive 只會連線至核心功能所需的服務，包括：</p>
+  <ul lang="zh-Hant">
+    <li><strong>api.notion.com</strong>：存取 Notion API。</li>
+    <li><strong>*.notion-static.com</strong>：取得由 Notion 提供的檔案內容。</li>
+    <li><strong>*.amazonaws.com</strong>：Notion 提供以 Amazon S3 為基礎的暫時檔案網址時，用於檔案上傳或下載。</li>
+  </ul>
+
+  <p lang="zh-Hant">
+    擴充功能不要求任意網站存取權限，也不收集使用者的一般瀏覽紀錄。
+  </p>
+
+  <h2 lang="zh-Hant">5. 遠端程式碼</h2>
+  <p lang="zh-Hant">
+    Notion Drive 不執行遠端託管的 JavaScript 或 WebAssembly。擴充功能所需的可執行程式碼
+    均包含在擴充功能套件內。從 Notion 或檔案儲存端點取得的內容只會作為資料處理，不會作為程式碼執行。
+  </p>
+
+  <h2 lang="zh-Hant">6. 資料分享與販售</h2>
+  <p lang="zh-Hant">Notion Drive 不會：</p>
+  <ul lang="zh-Hant">
+    <li>販售使用者資料。</li>
+    <li>將使用者資料用於廣告或行為分析。</li>
+    <li>將使用者資料用於與擴充功能單一用途無關的目的。</li>
+    <li>將使用者資料用於信用評分、貸款或金融資格判定。</li>
+  </ul>
+
+  <p lang="zh-Hant">
+    僅在執行使用者要求的操作時，必要資料才可能傳送至 Notion 與相關檔案儲存基礎設施。
+  </p>
+
+  <h2 lang="zh-Hant">7. Analytics 與追蹤</h2>
+  <p lang="zh-Hant">
+    Notion Drive 不包含由開發者營運的 Analytics、廣告或跨網站追蹤服務。
+  </p>
+
+  <h2 lang="zh-Hant">8. 資料保留與刪除</h2>
+  <p lang="zh-Hant">
+    使用者可以透過刪除 Profile、清除擴充功能儲存資料或解除安裝擴充功能來移除本機資料。
+    儲存在使用者 Notion 工作區中的資料仍由使用者控制，並可由使用者自行在 Notion 中刪除。
+  </p>
+
+  <p lang="zh-Hant">
+    Chrome Sync 資料由使用者的 Chrome 帳號與同步設定管理。解除安裝擴充功能本身，
+    不一定會立即刪除所有曾透過 Chrome 同步的資料。
+  </p>
+
+  <h2 lang="zh-Hant">9. 安全性</h2>
+  <p lang="zh-Hant">
+    Notion Drive 的設計是在檔案儲存前完成加密，並於使用時在本機解密。
+    使用者應自行妥善保護 Notion Integration Token、加密密碼、Chrome 帳號與裝置。
+  </p>
+
+  <p lang="zh-Hant">
+    如果遺失必要的加密憑證，加密檔案可能無法復原。
+  </p>
+
+  <h2 lang="zh-Hant">10. 第三方服務</h2>
+  <p lang="zh-Hant">
+    Notion Drive 依賴 Notion 與 Chrome 等第三方服務。這些服務如何處理資料，
+    由其各自的隱私權政策與服務條款規範。
+  </p>
+
+  <h2 lang="zh-Hant">11. 兒童隱私</h2>
+  <p lang="zh-Hant">
+    Notion Drive 並非以刻意蒐集兒童個人資訊為目的而設計。
+  </p>
+
+  <h2 lang="zh-Hant">12. 政策更新</h2>
+  <p lang="zh-Hant">
+    當 Notion Drive 的功能或資料處理方式改變時，本政策可能更新。
+    頁面頂端的日期代表目前最新版本。
+  </p>
+
+  <h2 lang="zh-Hant">13. 聯絡方式</h2>
+  <p lang="zh-Hant">
+    如有隱私權相關問題，請透過 Chrome Web Store 上 Notion Drive 商品頁所提供的支援聯絡方式或支援頁面與開發者聯絡。
+  </p>
+
+  <p class="muted" lang="zh-Hant">
+    Notion Drive 為獨立開發專案，與 Notion Labs, Inc. 無官方隸屬或背書關係。
+  </p>
+</article>
+</main>
+</body>
+</html>
