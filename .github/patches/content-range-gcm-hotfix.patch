@@ -9,12 +9,14 @@
  } = {}) {
    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end <= start)
      throw new Error('HTTP Range 範圍無效');
-@@ -45,8 +45,15 @@
+@@ -45,10 +45,19 @@
          if (retry) error.retryMs = Math.min(15_000, Math.max(0, Number(retry) * 1000 || Date.parse(retry) - Date.now() || 0));
          throw error;
        }
 -      const match = (response.headers.get('Content-Range') || '').match(/^bytes\s+(\d+)-(\d+)\/(\d+)$/i);
 -      if (!match || Number(match[1]) !== start || Number(match[2]) !== end - 1 ||
+-          !Number.isSafeInteger(Number(match[3])) || Number(match[3]) < end)
+-        throw new Error('伺服器回傳的 Content-Range 不符，已停止讀取');
 +      const contentRange = response.headers.get('Content-Range');
 +      const match = (contentRange || '').match(/^bytes\s+(\d+)-(\d+)\/(\d+)$/i);
 +      // Some CORS-enabled CDNs return HTTP 206 but do not expose Content-Range
@@ -24,9 +26,13 @@
 +      if (contentRange === null && allowMissingContentRange) {
 +        // The ciphertext's GCM tag is the authoritative offset/integrity check.
 +      } else if (!match || Number(match[1]) !== start || Number(match[2]) !== end - 1 ||
-           !Number.isSafeInteger(Number(match[3])) || Number(match[3]) < end)
-         throw new Error('伺服器回傳的 Content-Range 不符，已停止讀取');
++          !Number.isSafeInteger(Number(match[3])) || Number(match[3]) < end) {
++        const received = match ? `bytes ${match[1]}-${match[2]}/${match[3]}` : '格式錯誤';
++        throw new Error(`伺服器回傳的 Content-Range 不符（要求 bytes ${start}-${end - 1}，收到 ${received}），已停止讀取`);
++      }
        const length = response.headers.get('Content-Length');
+       if (length !== null && (!/^\d+$/.test(length) || Number(length) !== wanted))
+         throw new Error('伺服器回傳的 Range 長度不符，已停止讀取');
 --- a/web-v1.1.8/app.js
 +++ b/web-v1.1.8/app.js
 @@ -2117,7 +2117,11 @@
