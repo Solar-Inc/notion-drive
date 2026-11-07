@@ -1,0 +1,54 @@
+--- a/web-v1.1.8/range-http.js
++++ b/web-v1.1.8/range-http.js
+@@ -17,7 +17,7 @@
+ 
+ export async function readExactHttpRange(url, start, end, {
+   signal, fetchImpl = globalThis.fetch, timeoutMs = 45_000,
+-  maxAttempts = 3, delay = abortableDelay,
++  maxAttempts = 3, delay = abortableDelay, allowMissingContentRange = false,
+ } = {}) {
+   if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end <= start)
+     throw new Error('HTTP Range 範圍無效');
+@@ -45,8 +45,15 @@
+         if (retry) error.retryMs = Math.min(15_000, Math.max(0, Number(retry) * 1000 || Date.parse(retry) - Date.now() || 0));
+         throw error;
+       }
+-      const match = (response.headers.get('Content-Range') || '').match(/^bytes\s+(\d+)-(\d+)\/(\d+)$/i);
+-      if (!match || Number(match[1]) !== start || Number(match[2]) !== end - 1 ||
++      const contentRange = response.headers.get('Content-Range');
++      const match = (contentRange || '').match(/^bytes\s+(\d+)-(\d+)\/(\d+)$/i);
++      // Some CORS-enabled CDNs return HTTP 206 but do not expose Content-Range
++      // to browser JavaScript. Only authenticated NDRV1 callers may opt in:
++      // exact body length is still required and AES-GCM authenticates every
++      // ciphertext chunk before any plaintext reaches the media pipeline.
++      if (contentRange === null && allowMissingContentRange) {
++        // The ciphertext's GCM tag is the authoritative offset/integrity check.
++      } else if (!match || Number(match[1]) !== start || Number(match[2]) !== end - 1 ||
+           !Number.isSafeInteger(Number(match[3])) || Number(match[3]) < end)
+         throw new Error('伺服器回傳的 Content-Range 不符，已停止讀取');
+       const length = response.headers.get('Content-Length');
+--- a/web-v1.1.8/app.js
++++ b/web-v1.1.8/app.js
+@@ -2117,7 +2117,11 @@
+       signal?.addEventListener("abort",cancel,{once:true});
+       requestSignal?.addEventListener("abort",cancel,{once:true});
+       try {
+-        return await readExactHttpRange(remoteFetchUrl(target.url),from,to,{signal:combined.signal});
++        return await readExactHttpRange(remoteFetchUrl(target.url),from,to,{
++          signal:combined.signal,
++          // NDRV1 ciphertext is authenticated by AES-GCM after the exact bytes arrive.
++          allowMissingContentRange:true,
++        });
+       } finally {
+         signal?.removeEventListener("abort",cancel);
+         requestSignal?.removeEventListener("abort",cancel);
+--- a/web-v1.1.8/sw.js
++++ b/web-v1.1.8/sw.js
+@@ -1,6 +1,6 @@
+ // Cache ONLY the static application shell. No Notion API, signed CDN URLs,
+ // tokens, decrypted bytes, or mutable user data are cached by this worker.
+-const CACHE = "ndrive-web-shell-1.1.8-rc2-web1";
++const CACHE = "ndrive-web-shell-1.1.8-rc3-range1";
+ const ASSETS = ["./index.html", "./app.js", "./styles.css", "./web-bootstrap.js", "./web-config.js", "./web-storage.js", "./site.webmanifest", "./icons/ndrive.svg", "./vendor/mpegts.js", "./crypto.js", "./zip-store.js", "./encrypted-flv-range.js", "./encrypted-mp3.js", "./encrypted-mse-video.js", "./flac-progressive.js", "./memory-media-source.js", "./mp4-progressive.js", "./ndrv1-random-reader.js", "./range-http.js", "./preview-media-enhancements.js", "./_locales/zh_TW/messages.json", "./_locales/en/messages.json"];
+ self.addEventListener("install", event => event.waitUntil(
+   caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
