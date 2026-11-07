@@ -34,6 +34,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Unpack Notion Drive Web 1.1.8
         run: unzip -q NotionDrive-Web-v1.1.8-RC2-Web.zip -d .
+      - name: Apply authenticated FLV Range CORS workaround
+        run: patch -p1 < .github/patches/content-range-gcm-hotfix.patch
       - name: Publish app at Pages root
         run: cp -a web-v1.1.8/. .
       - name: Keep underscore assets on GitHub Pages
