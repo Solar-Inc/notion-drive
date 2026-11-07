@@ -1,6 +1,6 @@
 --- a/web-v1.1.8/range-http.js
 +++ b/web-v1.1.8/range-http.js
-@@ -17,7 +17,7 @@ 
+@@ -17,6 +17,6 @@ 
  export async function readExactHttpRange(url, start, end, {
    signal, fetchImpl = globalThis.fetch, timeoutMs = 45_000,
 -  maxAttempts = 3, delay = abortableDelay,
