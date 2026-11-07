@@ -54,7 +54,7 @@
  // Cache ONLY the static application shell. No Notion API, signed CDN URLs,
  // tokens, decrypted bytes, or mutable user data are cached by this worker.
 -const CACHE = "ndrive-web-shell-1.1.8-rc2-web1";
-+const CACHE = "ndrive-web-shell-1.1.8-rc3-range1";
++const CACHE = "ndrive-web-shell-1.1.8-rc3-range2";
  const ASSETS = ["./index.html", "./app.js", "./styles.css", "./web-bootstrap.js", "./web-config.js", "./web-storage.js", "./site.webmanifest", "./icons/ndrive.svg", "./vendor/mpegts.js", "./crypto.js", "./zip-store.js", "./encrypted-flv-range.js", "./encrypted-mp3.js", "./encrypted-mse-video.js", "./flac-progressive.js", "./memory-media-source.js", "./mp4-progressive.js", "./ndrv1-random-reader.js", "./range-http.js", "./preview-media-enhancements.js", "./_locales/zh_TW/messages.json", "./_locales/en/messages.json"];
  self.addEventListener("install", event => event.waitUntil(
    caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
