@@ -34,10 +34,14 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Unpack Notion Drive Web 1.1.8
         run: unzip -q NotionDrive-Web-v1.1.8-RC2-Web.zip -d .
+      - name: Publish app at Pages root
+        run: cp -a web-v1.1.8/. .
+      - name: Keep underscore assets on GitHub Pages
+        run: touch .nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository, including web-v1.1.8/
+          # Upload the complete repository, with the app also at the site root
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
